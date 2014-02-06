@@ -11,7 +11,7 @@
 <?php
   $is_ready = true;
 
-  if (version_compare(PHP_VERSION, '5.3', '>=') != true)
+  if (version_compare(PHP_VERSION, '5.3.6', '>=') != true)
     $is_ready = false;
 
   $have_rewrite = apache_is_module_loaded('mod_rewrite');
