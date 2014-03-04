@@ -9,23 +9,23 @@
 *******************************************************************/
 ?>
 <?php
-  $is_ready = true;
+  $is_ready = TRUE;
 
-  if (version_compare(PHP_VERSION, '5.3.6', '>=') != true)
-    $is_ready = false;
+  if (version_compare(PHP_VERSION, '5.3.6', '>=') !== TRUE)
+    $is_ready = FALSE;
 
   $have_rewrite = apache_is_module_loaded('mod_rewrite');
-  if ($have_rewrite != true)
-    $is_ready = false;
+  if ($have_rewrite != TRUE)
+    $is_ready = FALSE;
 
   if ( ! function_exists('preg_match'))
-     $is_ready = false;
+     $is_ready = FALSE;
 
   if ( ! @preg_match('/^.$/u', 'ñ'))
-    $is_ready = false;
+    $is_ready = FALSE;
 
   if ( ! @preg_match('/^\pL$/u', 'ñ'))
-    $is_ready = false;
+    $is_ready = FALSE;
 
 ?>
 <!doctype html>
@@ -44,11 +44,11 @@
           <hr/ >
 
           <?php if ($is_ready): ?>
-            <h3 class="ready">Good job, son. Your server seems worthy. You are ready for Statamic.</h3>
+            <h3 class="ready">Fantastic, your server looks ready for Statamic.</h3>
           <?php else: ?>
             <?php if ($have_rewrite): ?>
               <h3 class="not-ready">Easy slugger, it seems that your server may not be ready for Statamic.</h3>
-              <p>It would appear your server may NOT be ready to run Statamic (0.9)</p>
+              <p>It would appear your server may NOT be ready to run Statamic</p>
             <?php else: ?>
               <h3 class="not-ready">Curious, it seems that your server may not be ready.</h3>
               <p>We could not determine if Mod Rewrite was enabled or not</p>
@@ -61,14 +61,14 @@
           <table cellspacing="0">
             <tr>
               <th class="label">PHP Version</th>
-              <?php if (version_compare(PHP_VERSION, '5.3', '>=')): ?>
+              <?php if (version_compare(PHP_VERSION, '5.3.6', '>=')): ?>
                 <td class="sign pass">Pass</td>
                 <td class="version"><?php echo PHP_VERSION ?></td>
                 <td class="instructions"></td>
               <?php else: $failed = TRUE ?>
                 <td class="sign fail">Failed</td>
                 <td class="version"><?php echo PHP_VERSION ?></td>
-                <td class="instructions exclam">Statamic requires PHP 5.3 or newer</td>
+                <td class="instructions exclam">Statamic requires PHP 5.3.6 or newer</td>
               <?php endif ?>
             </tr>
 
@@ -113,7 +113,7 @@
 
             <tr>
               <th class="label">cURL</th>
-              <?php $have_curl = function_exists('curl_version') ? true : false; ?>
+              <?php $have_curl = function_exists('curl_version') ? TRUE : FALSE; ?>
               <?php if ($have_curl): ?>
                 <td class="sign pass">Pass</td>
                 <td class="version"></td>
