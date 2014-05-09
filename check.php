@@ -12,7 +12,7 @@ $is_ready = TRUE;
 
 $required = array(
 	'PHP 5.3.6+' => version_compare(PHP_VERSION, '5.3.6', '>='),
-	'Mod Rewrite' => hasApacheModule('mod_rewrite'),
+	'Mod Rewrite' => hasModRewrite('mod_rewrite'),
 	'PCRE and UTF-8 Support' => function_exists('preg_match') && @preg_match('/^.$/u', 'ñ') && @preg_match('/^\pL$/u', 'ñ'),
 	'Multibyte Encoding' => extension_loaded('mbstring'),
 	'Mcrypt' => extension_loaded('mcrypt')
@@ -266,7 +266,7 @@ foreach ($required as $feature => $pass) {
 
 	function hasApacheModule($module)
 	{
-		return in_array($module, apache_get_modules());
+		return in_array($module, @apache_get_modules());
 	}
 
 	function hasModRewrite()
