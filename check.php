@@ -21,6 +21,7 @@ $required = array(
 $recommended = array(
 	'Timezone Set' => ini_get('date.timezone') !== '',
 	'GD Library for image manipulation' => (extension_loaded('gd') && function_exists('gd_info')),
+	'FileInfo Extension for image manipulation' => extension_loaded('fileinfo'),
 	'cURL' => function_exists('curl_version')
 );
 
