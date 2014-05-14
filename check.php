@@ -12,13 +12,13 @@ $is_ready = TRUE;
 
 $required = array(
 	'PHP 5.3.6+' => version_compare(PHP_VERSION, '5.3.6', '>='),
-	'Mod Rewrite' => hasModRewrite('mod_rewrite'),
 	'PCRE and UTF-8 Support' => function_exists('preg_match') && @preg_match('/^.$/u', 'ñ') && @preg_match('/^\pL$/u', 'ñ'),
 	'Multibyte Encoding' => extension_loaded('mbstring'),
 	'Mcrypt' => extension_loaded('mcrypt')
 );
 
 $recommended = array(
+	'Mod Rewrite' => hasModRewrite('mod_rewrite'),
 	'Timezone Set' => ini_get('date.timezone') !== '',
 	'GD Library for image manipulation' => (extension_loaded('gd') && function_exists('gd_info')),
 	'FileInfo Extension for image manipulation' => extension_loaded('fileinfo'),
@@ -267,14 +267,18 @@ foreach ($required as $feature => $pass) {
 
 	function hasApacheModule($module)
 	{
-		return in_array($module, @apache_get_modules());
+		if (function_exists('apache_get_modules')) {
+			return in_array($module, apache_get_modules());
+		}
+
+		return false;
 	}
 
 	function hasModRewrite()
 	{
 		$check = hasApacheModule('mod_rewrite');
 		
-		if ( ! $check) {
+		if ( ! $check && function_exists('shell_exec')) {
 			$check = strpos(shell_exec('/usr/local/apache/bin/apachectl -l'), 'mod_rewrite') !== FALSE;
 		}
 
