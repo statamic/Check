@@ -1,14 +1,42 @@
 <?php
-/*******************************************************************
-*                                                                  *
-* If you see this text, it means that your server is not running   *
-* PHP. You can’t run Statamic.                                    *
-*                                                                  *
-* Ask your system administrator to install PHP.                    *
-*                                                                  *
-*******************************************************************/
+
+/*
+|--------------------------------------------------------------------------
+| Statamic is a PHP Application
+|--------------------------------------------------------------------------
+|
+| If you see this text, your server is not running PHP. You'll need to 
+| contact your system administrator, webhost, or Google to enable it, 
+| or maybe try a different host.
+|
+*/
 
 $is_ready = TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| Error Reporting
+|--------------------------------------------------------------------------
+|
+| Not everything we need can be checked by scripts, so we'll turn
+| error reporting up to 11. In general, an error is going to mean 
+| the server probably isn't ready.
+|
+*/
+
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors','1');
+
+/*
+|--------------------------------------------------------------------------
+| Required Bits
+|--------------------------------------------------------------------------
+|
+| These things are absolutely required to be able to use Statamic. You
+| *might* be able to hack around Multibyte encoding if you don't use
+| special characters in your URLs, but that's about it.
+|
+*/
 
 $required = array(
 	'PHP 5.3.6+' => version_compare(PHP_VERSION, '5.3.6', '>='),
@@ -16,6 +44,19 @@ $required = array(
 	'Multibyte Encoding' => extension_loaded('mbstring'),
 	'Mcrypt' => extension_loaded('mcrypt')
 );
+
+/*
+|--------------------------------------------------------------------------
+| Recommended Bits
+|--------------------------------------------------------------------------
+|
+| You don't *have* to have these things to run Statamic, but certain
+| features will be broken, like image resizing/manipulation, or your
+| URLs won't be able to hide the "index.php" in them if you're missing
+| Mod Rewrite. Also, Mod Rewrite is a tricky thing to detect if you're
+| running PHP as CGI. A fail doesn't necessarily mean it's missing.
+|
+*/
 
 $recommended = array(
 	'Mod Rewrite' => hasModRewrite('mod_rewrite'),
