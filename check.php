@@ -245,7 +245,7 @@ foreach ($required as $feature => $pass) {
 						<a href="https://store.statamic.com" class="button">Buy a Statamic License</a>
 						<p>Or you can check out the <a href="http://statamic.com/learn">documentation</a> to learn more.</p>
 					<?php else: ?>
-						<a href="http://www.arcustech.com/?referrer=427f7820-a526-4c06-8a7c-838771e48f59" class="button">Get a great web host.</a>
+						<a href="https://github.com/statamic/hosts" class="button">Get a great web host.</a>
 					<?php endif ?>
 				</div>
 			</div>
