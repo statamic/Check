@@ -1,6 +1,6 @@
-# Statamic Server
+# Statamic Server Check Tool ![Statamic v1](https://img.shields.io/badge/statamic-v1-lightgrey.svg?style=flat-square)
 
-Determine if your server can run Statamic, as well as give you some basic information about your server.
+Determine if your server can run Statamic v1, as well as give you some basic information about your server.
 
 ## How to use this
 
